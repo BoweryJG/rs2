@@ -1,0 +1,1201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RepSpheres | Intelligent Healthcare Rep Engagement</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #4f46e5;
+      --accent: #f59e0b;
+      --premium-gold: #f59e0b;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --bg-light: #f8fafc;
+      --white: #ffffff;
+      --gradient-start: #3b82f6;
+      --gradient-end: #4f46e5;
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --radius: 0.5rem;
+      --radius-lg: 1rem;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    
+    body {
+      color: var(--text);
+      background-color: var(--bg-light);
+      line-height: 1.5;
+    }
+    
+    /* Header styles */
+    header {
+      background-color: var(--white);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 0;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--primary);
+    }
+    
+    .logo-icon {
+      margin-right: 0.5rem;
+      width: 2rem;
+      height: 2rem;
+      background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+    
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+    
+    nav a {
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    
+    nav a:hover {
+      color: var(--primary);
+    }
+    
+    .header-actions {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1.25rem;
+      border-radius: var(--radius);
+      font-weight: 500;
+      transition: all 0.2s;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+    }
+    
+    .btn-outline {
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      background: transparent;
+    }
+    
+    .btn-outline:hover {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+    }
+    
+    /* Hero section */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 4rem 0;
+      background: linear-gradient(120deg, #2563eb 0%, #4f46e5 100%);
+      color: white;
+    }
+    
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    
+    .hero-content {
+      max-width: 36rem;
+    }
+    
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero p {
+      font-size: 1.25rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+    
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .btn-white {
+      background-color: white;
+      color: var(--primary);
+    }
+    
+    .btn-white:hover {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+    
+    .btn-white-outline {
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      color: white;
+      background: transparent;
+    }
+    
+    .btn-white-outline:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .hero-image {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .dashboard-preview {
+      max-width: 100%;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      transform: perspective(1000px) rotateY(-5deg) rotateX(5deg);
+      transition: transform 0.3s ease;
+    }
+    
+    .dashboard-preview:hover {
+      transform: perspective(1000px) rotateY(0deg) rotateX(0deg);
+    }
+    
+    /* Features Section */
+    .section {
+      padding: 5rem 0;
+    }
+    
+    .section-header {
+      text-align: center;
+      max-width: 48rem;
+      margin: 0 auto 3rem;
+    }
+    
+    .section-title {
+      font-size: 2.25rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    
+    .section-description {
+      font-size: 1.125rem;
+      color: var(--text-light);
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    
+    .feature-card {
+      background-color: var(--white);
+      border-radius: var(--radius);
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .feature-icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .feature-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    
+    .feature-description {
+      color: var(--text-light);
+    }
+    
+    /* Intelligence Vault Section */
+    .vault-section {
+      background-color: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    
+    .vault-header {
+      background: linear-gradient(90deg, #1e293b, #334155);
+      color: white;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .vault-title {
+      font-size: 1.875rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .premium-badge {
+      background-color: var(--premium-gold);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.25rem 0.5rem;
+      border-radius: 1rem;
+      margin-left: 0.75rem;
+      text-transform: uppercase;
+    }
+    
+    .vault-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      padding: 2rem;
+    }
+    
+    .sphere-card {
+      background-color: var(--bg-light);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: transform 0.3s;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .sphere-card:hover {
+      transform: translateY(-3px);
+    }
+    
+    .sphere-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .sphere-icon {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 0.75rem;
+      color: white;
+    }
+    
+    .market-icon {
+      background: linear-gradient(135deg, #3b82f6, #2563eb);
+    }
+    
+    .innovation-icon {
+      background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+    }
+    
+    .revenue-icon {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+    }
+    
+    .patient-icon {
+      background: linear-gradient(135deg, #14b8a6, #0d9488);
+    }
+    
+    .sphere-title {
+      font-weight: 600;
+      font-size: 1.125rem;
+    }
+    
+    .sphere-content {
+      margin-bottom: 1.5rem;
+    }
+    
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+    
+    .stat-item {
+      background-color: rgba(255, 255, 255, 0.5);
+      padding: 0.75rem;
+      border-radius: var(--radius);
+      text-align: center;
+    }
+    
+    .stat-value {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+    }
+    
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-light);
+    }
+    
+    .upgrade-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(255, 255, 255, 0.8);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      text-align: center;
+      backdrop-filter: blur(4px);
+    }
+    
+    .lock-icon {
+      width: 3rem;
+      height: 3rem;
+      color: var(--premium-gold);
+      margin-bottom: 1rem;
+    }
+    
+    .upgrade-text {
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    
+    .btn-premium {
+      background-color: var(--premium-gold);
+      color: white;
+    }
+    
+    .btn-premium:hover {
+      background-color: #e59000;
+    }
+    
+    /* Pricing Section */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    
+    .pricing-card {
+      background-color: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .pricing-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+    
+    .pricing-card.premium {
+      border: 2px solid var(--premium-gold);
+      position: relative;
+    }
+    
+    .premium-tag {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background-color: var(--premium-gold);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 1rem;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+    
+    .pricing-header {
+      padding: 2rem;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+    
+    .pricing-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .pricing-description {
+      color: var(--text-light);
+      margin-bottom: 1.5rem;
+    }
+    
+    .pricing-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+    }
+    
+    .pricing-period {
+      color: var(--text-light);
+      font-size: 0.875rem;
+    }
+    
+    .pricing-features {
+      padding: 2rem;
+    }
+    
+    .pricing-features ul {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+    
+    .pricing-features li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .check-icon {
+      color: #10b981;
+      margin-right: 0.75rem;
+      flex-shrink: 0;
+    }
+    
+    .pricing-features .btn {
+      width: 100%;
+      padding: 0.75rem;
+    }
+    
+    /* Testimonial Section */
+    .testimonial-section {
+      background-color: var(--white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    
+    .testimonial-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    .testimonial-content {
+      padding: 3rem;
+    }
+    
+    .testimonial-text {
+      font-size: 1.5rem;
+      font-weight: 500;
+      font-style: italic;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    
+    .testimonial-text::before {
+      content: '"';
+      font-size: 4rem;
+      position: absolute;
+      top: -1.5rem;
+      left: -0.5rem;
+      color: rgba(0, 0, 0, 0.1);
+      font-family: Georgia, serif;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+    }
+    
+    .author-avatar {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      margin-right: 1rem;
+      background-color: #e2e8f0;
+      overflow: hidden;
+    }
+    
+    .author-info h4 {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .author-info p {
+      color: var(--text-light);
+      font-size: 0.875rem;
+    }
+    
+    .testimonial-image {
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      text-align: center;
+      margin-top: 3rem;
+    }
+    
+    .stat-card {
+      background-color: var(--white);
+      padding: 2rem;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    
+    .stat-card-value {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-card-label {
+      color: var(--text-light);
+      font-weight: 500;
+    }
+    
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: white;
+      text-align: center;
+      padding: 4rem 0;
+      border-radius: var(--radius-lg);
+      margin-bottom: 5rem;
+    }
+    
+    .cta-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    
+    .cta-description {
+      font-size: 1.25rem;
+      max-width: 36rem;
+      margin: 0 auto 2rem;
+      opacity: 0.9;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: #1e293b;
+      color: white;
+      padding: 4rem 0 2rem;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .footer-logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    
+    .footer-description {
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 1.5rem;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .social-link {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: background-color 0.2s;
+    }
+    
+    .social-link:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+    
+    .footer-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 0.75rem;
+    }
+    
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.7);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    
+    .footer-links a:hover {
+      color: white;
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.875rem;
+    }
+    
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .features-grid,
+      .pricing-grid,
+      .testimonial-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+      
+      .hero-content {
+        text-align: center;
+        margin: 0 auto;
+      }
+      
+      .hero-actions {
+        justify-content: center;
+      }
+      
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .vault-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .header-content {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      nav ul {
+        gap: 1rem;
+      }
+    }
+    
+    /* Animation keyframes */
+    @keyframes float {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+    
+    .float-animation {
+      animation: float 6s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <div class="logo-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 0c4.418 0 8 3.582 8 8s-3.582 8-8 8-8-3.582-8-8 3.582-8 8-8zM5.5 7a1.5 1.5 0 100 3 1.5 1.5 0 000-3zm5 0a1.5 1.5 0 100 3 1.5 1.5 0 000-3z"/>
+            </svg>
+          </div>
+          RepSpheres
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#">Platform</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Resources</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions">
+          <a href="#" class="btn btn-outline">Log In</a>
+          <a href="#" class="btn btn-primary">Request Demo</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <h1>Transform Healthcare Rep Engagement with AI-Powered Insights</h1>
+          <p>RepSpheres helps medical sales teams build stronger relationships, optimize territory management, and access real-time competitive intelligence.</p>
+          <div class="hero-actions">
+            <a href="#" class="btn btn-white">Get Started</a>
+            <a href="#" class="btn btn-white-outline">See how it works</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="/api/placeholder/600/350" alt="RepSpheres Dashboard Preview" class="dashboard-preview">
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Transform Your Sales Approach</h2>
+        <p class="section-description">RepSpheres delivers actionable insights that help healthcare reps build deeper connections with healthcare providers.</p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 3.5a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-.5.5H4a.5.5 0 0 1 0-1h3.5V4a.5.5 0 0 1 .5-.5z"/>
+                  <path d="M14 3a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2h2z"/>
+                </svg>
+              </div>
+              <h4 class="sphere-title">MarketSphere</h4>
+            </div>
+            <div class="sphere-content">
+              <p>Competitive intelligence data with real-time market insights across your territories.</p>
+            </div>
+            <div class="stat-grid">
+              <div class="stat-item">
+                <div class="stat-value">24%</div>
+                <div class="stat-label">Engagement Lift</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value">3.2x</div>
+                <div class="stat-label">ROI</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="sphere-card">
+            <div class="sphere-header">
+              <div class="sphere-icon innovation-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492zM5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0z"/>
+                  <path d="M9.796 1.343c-.527-1.79-3.065-1.79-3.592 0l-.094.319a.873.873 0 0 1-1.255.52l-.292-.16c-1.64-.892-3.433.902-2.54 2.541l.159.292a.873.873 0 0 1-.52 1.255l-.319.094c-1.79.527-1.79 3.065 0 3.592l.319.094a.873.873 0 0 1 .52 1.255l-.16.292c-.892 1.64.901 3.434 2.541 2.54l.292-.159a.873.873 0 0 1 1.255.52l.094.319c.527 1.79 3.065 1.79 3.592 0l.094-.319a.873.873 0 0 1 1.255-.52l.292.16c1.64.893 3.434-.902 2.54-2.541l-.159-.292a.873.873 0 0 1 .52-1.255l.319-.094c1.79-.527 1.79-3.065 0-3.592l-.319-.094a.873.873 0 0 1-.52-1.255l.16-.292c.893-1.64-.902-3.433-2.541-2.54l-.292.159a.873.873 0 0 1-1.255-.52l-.094-.319zm-2.633.283c.246-.835 1.428-.835 1.674 0l.094.319a1.873 1.873 0 0 0 2.693 1.115l.291-.16c.764-.415 1.6.42 1.184 1.185l-.159.292a1.873 1.873 0 0 0 1.116 2.692l.318.094c.835.246.835 1.428 0 1.674l-.319.094a1.873 1.873 0 0 0-1.115 2.693l.16.291c.415.764-.42 1.6-1.185 1.184l-.291-.159a1.873 1.873 0 0 0-2.693 1.116l-.094.318c-.246.835-1.428.835-1.674 0l-.094-.319a1.873 1.873 0 0 0-2.692-1.115l-.292.16c-.764.415-1.6-.42-1.184-1.185l.159-.291A1.873 1.873 0 0 0 1.945 8.93l-.319-.094c-.835-.246-.835-1.428 0-1.674l.319-.094A1.873 1.873 0 0 0 3.06 4.377l-.16-.292c-.415-.764.42-1.6 1.185-1.184l.292.159a1.873 1.873 0 0 0 2.692-1.115l.094-.319z"/>
+                </svg>
+              </div>
+              <h4 class="sphere-title">InnovationSphere</h4>
+            </div>
+            <div class="sphere-content">
+              <p>Emerging technologies and treatment protocols that will shape the future of healthcare.</p>
+            </div>
+            <div class="upgrade-overlay">
+              <svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              <p class="upgrade-text">Unlock premium content with Intelligence Vault</p>
+              <a href="#" class="btn btn-premium">Upgrade Now</a>
+            </div>
+          </div>
+          
+          <div class="sphere-card">
+            <div class="sphere-header">
+              <div class="sphere-icon revenue-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z"/>
+                </svg>
+              </div>
+              <h4 class="sphere-title">RevenueSphere</h4>
+            </div>
+            <div class="sphere-content">
+              <p>Optimization strategies to maximize revenue and market share across product lines.</p>
+            </div>
+            <div class="upgrade-overlay">
+              <svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              <p class="upgrade-text">Unlock premium content with Intelligence Vault</p>
+              <a href="#" class="btn btn-premium">Upgrade Now</a>
+            </div>
+          </div>
+          
+          <div class="sphere-card">
+            <div class="sphere-header">
+              <div class="sphere-icon patient-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+                </svg>
+              </div>
+              <h4 class="sphere-title">PatientSphere</h4>
+            </div>
+            <div class="sphere-content">
+              <p>Patient behavior trends and treatment preferences to inform your messaging strategy.</p>
+            </div>
+            <div class="upgrade-overlay">
+              <svg class="lock-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+              <p class="upgrade-text">Unlock premium content with Intelligence Vault</p>
+              <a href="#" class="btn btn-premium">Upgrade Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Choose Your Plan</h2>
+        <p class="section-description">Select the right plan to maximize your team's performance.</p>
+      </div>
+      
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3 class="pricing-name">Standard</h3>
+            <p class="pricing-description">Everything you need to get started with RepSpheres.</p>
+            <div class="pricing-value">$199</div>
+            <div class="pricing-period">per user / month</div>
+          </div>
+          <div class="pricing-features">
+            <ul>
+              <li>
+                <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                </svg>
+                Real-time activity tracking
+              </li>
+              <li>
+                <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                </svg>
+                Basic conversation insights
+              </li>
+              <li>
+                <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                </svg>
+                Territory management tools
+              </li>
+              <li>
+                <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                </svg>
+                Basic reporting
+              </li>
+              <li>
+                <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                </svg>
+                8x5 support
+              </li>
+            </ul>
+            <a href="#" class="btn btn-primary">Get Started</a>
+          </div>
+        </div>
+        
+        <div class="pricing-card premium">
+          <span class="premium-tag">MOST POPULAR</span>
+          <div class="pricing-header">
+            <h3 class="pricing-name">Intelligence Vault</h3>
+            <p class="pricing-description">Unlock the full power of RepSpheres with premium insights.</p>
+            <div class="pricing-value">$349</div>
+            <div class="pricing-period">per user / month</div>
+          </div>
+          <div class="pricing-features">
+            <ul>
+              <li>
+                <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                </svg>
+                Everything in Standard
+              </li>
+              <li>
+                <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                </svg>
+                Access to all Intelligence Spheres
+              </li>
+              <li>
+                <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                </svg>
+                Advanced AI analytics
+              </li>
+              <li>
+                <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                </svg>
+                Custom reporting
+              </li>
+              <li>
+                <svg class="check-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"/>
+                </svg>
+                Priority 24/7 support
+              </li>
+            </ul>
+            <a href="#" class="btn btn-premium">Upgrade Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section">
+    <div class="container">
+      <div class="testimonial-section">
+        <div class="testimonial-grid">
+          <div class="testimonial-content">
+            <div class="testimonial-text">
+              RepSpheres has transformed how our sales team operates. We've seen a 32% increase in engagement rates and our reps are closing more deals with less effort.
+            </div>
+            <div class="testimonial-author">
+              <div class="author-avatar">
+                <img src="/api/placeholder/48/48" alt="Sarah Johnson">
+              </div>
+              <div class="author-info">
+                <h4>Sarah Johnson</h4>
+                <p>VP of Sales, MedTech Innovations</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-image">
+            <img src="/api/placeholder/500/300" alt="Medical Sales Rep Using RepSpheres">
+          </div>
+        </div>
+      </div>
+      
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-card-value">96%</div>
+          <div class="stat-card-label">Customer Satisfaction</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-value">32%</div>
+          <div class="stat-card-label">Average Revenue Increase</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card-value">4.2hrs</div>
+          <div class="stat-card-label">Time Saved Per Week</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section">
+    <div class="container">
+      <div class="cta-section">
+        <h2 class="cta-title">Ready to Transform Your Healthcare Sales?</h2>
+        <p class="cta-description">Join hundreds of leading healthcare companies already using RepSpheres to drive results.</p>
+        <div class="hero-actions">
+          <a href="#" class="btn btn-white">Request Demo</a>
+          <a href="#" class="btn btn-white-outline">Contact Sales</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo">RepSpheres</div>
+          <p class="footer-description">Empowering healthcare reps with AI-driven insights to build stronger relationships and drive results.</p>
+          <div class="social-links">
+            <a href="#" class="social-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+              </svg>
+            </a>
+            <a href="#" class="social-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+              </svg>
+            </a>
+            <a href="#" class="social-link">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="footer-title">Product</h4>
+          <ul class="footer-links">
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#">Intelligence Vault</a></li>
+            <li><a href="#">Integrations</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="footer-title">Resources</h4>
+          <ul class="footer-links">
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Case Studies</a></li>
+            <li><a href="#">Support</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="footer-title">Company</h4>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        &copy; 2025 RepSpheres. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+</html>0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
+              <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Real-Time Activity Tracking</h3>
+          <p class="feature-description">Track healthcare provider engagement metrics across all communication channels to identify opportunities and maximize impact.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M11 2a3 3 0 0 1 3 3v6a3 3 0 0 1-3 3H5a3 3 0 0 1-3-3V5a3 3 0 0 1 3-3h6zM5 1a4 4 0 0 0-4 4v6a4 4 0 0 0 4 4h6a4 4 0 0 0 4-4V5a4 4 0 0 0-4-4H5z"/>
+              <path d="M4.5 6.5A.5.5 0 0 1 5 6h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0 2A.5.5 0 0 1 5 8h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5zm0 2A.5.5 0 0 1 5 10h6a.5.5 0 0 1 0 1H5a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">AI-Powered Conversation Insights</h3>
+          <p class="feature-description">Our natural language processing analyzes interactions to surface key topics, sentiment, and competitive mentions.</p>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 14.5a6.5 6.5 0 1 1 0-13 6.5 6.5 0 0 1 0 13zM8 4a.5.5 0 0 0-.5.5v5.26L4.2 11.9a.5.5 0 0 0 .6.8l3.5-2.5a.5.5 0 0 0 .2-.4V4.5A.5.5 0 0 0 8 4z"/>
+            </svg>
+          </div>
+          <h3 class="feature-title">Territory Optimization</h3>
+          <p class="feature-description">Prioritize your highest-value accounts with machine learning algorithms that predict engagement potential and prescribing patterns.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Intelligence Vault</h2>
+        <p class="section-description">Access premium insights that give your team the competitive edge.</p>
+      </div>
+      
+      <div class="vault-section">
+        <div class="vault-header">
+          <h3 class="vault-title">
+            Intelligence Vault
+            <span class="premium-badge">Premium</span>
+          </h3>
+          <p>Unlock exclusive data-driven insights to drive strategic decisions.</p>
+        </div>
+        
+        <div class="vault-grid">
+          <div class="sphere-card">
+            <div class="sphere-header">
+              <div class="sphere-icon market-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                  <path d="M8 3.5a.5.5 0
