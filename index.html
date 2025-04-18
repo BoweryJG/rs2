@@ -796,6 +796,20 @@
           RepSpheres
         </div>
         <nav>
+          <button class="hamburger" id="hamburgerBtn" aria-label="Open navigation menu" aria-controls="mobileNav" aria-expanded="false">
+            <span></span><span></span><span></span>
+          </button>
+          <ul>
+            <li><a href="#">Platform</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Pricing</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#podcast">Podcast</a></li>
+            <li><a href="#">Resources</a></li>
+          </ul>
+        </nav>
+        <!-- Mobile Nav -->
+        <nav id="mobileNav" class="mobile-nav" aria-label="Mobile Navigation" hidden>
           <ul>
             <li><a href="#">Platform</a></li>
             <li><a href="#">Features</a></li>
@@ -812,6 +826,23 @@
       </div>
     </div>
   </header>
+  <script>
+    // Hamburger menu toggle
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburgerBtn.addEventListener('click', function() {
+      const expanded = this.getAttribute('aria-expanded') === 'true';
+      this.setAttribute('aria-expanded', !expanded);
+      mobileNav.hidden = expanded;
+    });
+    // Optional: close menu on link click (for single page UX)
+    mobileNav.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburgerBtn.setAttribute('aria-expanded', false);
+        mobileNav.hidden = true;
+      });
+    });
+  </script>
   
   <section class="hero stunning-hero" aria-label="Welcome to RepSpheres">
     <!-- Animated SVG background -->
