@@ -59,3 +59,36 @@
     display: block;
   }
 }
+
+/* Liquid Gold Border Animation for Intelligence Vault */
+.liquid-gold-border {
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.liquid-gold-border::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  z-index: 2;
+  border-radius: var(--radius);
+  padding: 0;
+  background: conic-gradient(
+    #ffd700 0%, #fffbe6 10%, #ffec80 20%, #ffb300 40%, #fffbe6 60%, #ffd700 80%, #fffbe6 100%
+  );
+  background-size: 200% 200%;
+  animation: goldFlow 3s linear infinite;
+  pointer-events: none;
+  mask-image: linear-gradient(black 0 0), linear-gradient(black 0 0);
+  mask-composite: exclude;
+  -webkit-mask-image: linear-gradient(black 0 0), linear-gradient(black 0 0);
+  -webkit-mask-composite: xor;
+}
+.liquid-gold-border > * {
+  position: relative;
+  z-index: 3;
+}
+@keyframes goldFlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
